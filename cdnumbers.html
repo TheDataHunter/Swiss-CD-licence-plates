@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CD NUMBERS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style> 
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'); 
+        body{
+            margin: 0;
+            font-family: 'Bebas Neue', cursive;
+        }
+        
+        header {
+            background-color: #10a08c;
+            color: white;
+            padding: 24px 10%;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .header-info{
+            font-size: 24px;
+            align-self: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 10%;
+        }
+
+        .cdinput{
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            padding: 10%;
+        }
+
+        input[type='number']{
+            width: 100%;
+        } 
+
+        #resultContainer {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #10a08c;
+            color: white;
+            padding: 16px;
+            border: unset;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .cdimg{
+            width:80%;
+            align-self: center;
+            border: 5px solid black;
+        }
+
+        .cd-sign{
+            background-color:#10a08c;
+            color:white;
+            font-size:larger;
+        }
+    </style>
+</head>
+<body>
+    <header>cd numbers search</header>
+
+    <form onsubmit="calculate(); return false;">
+        <span class="header-info">search your cd car plate numbers.</span>
+        <img class="cdimg" src="https://devshit.tech/cd_rus_plate.jpg">
+        
+        <div class="cdinput">
+            <nobr><span class="cd-sign"> &nbsp CD &nbsp</span> &nbsp XX </nobr>
+            <input name="firstnum" required type="number" min="0" max="999" placeholder="rank number">
+            •
+            <input name="secondnum" required type="number" min="0" max="999" placeholder="country number">
+        </div>
+        
+        <button>search</button>
+
+        <div id="resultContainer">
+            <?php
+
+            $cd_ar = array(
+                1 => 'Vatikan',
+                2 => 'Kanada',
+                3 => 'Sri Lanka',
+                4 => 'Australien',
+                5 => 'Iran',
+                6 => 'Spanien',
+                7 => 'Israel',
+                8 => 'Kuwait',
+                9 => 'USA',
+                10 => 'Brasilien',
+                11 => 'Mexiko',
+                12 => 'Irland',
+                13 => 'Japan',
+                14 => 'Neuseeland',
+                15 => 'Liechtenstein',
+                16 => 'Monaco',
+                17 => 'Südafrika',
+                18 => 'Ägypten',
+                19 => 'Syrien',
+                20 => 'Algerien',
+                21 => 'Argentinien',
+                22 => 'Österreich',
+                23 => 'Bolivien',
+                24 => 'Chile',
+                25 => 'Kolumbien',
+                26 => 'Südkorea',
+                27 => 'Costa Rica',
+                28 => 'Elfenbeinküste',
+                29 => 'Kuba',
+                30 => 'Ecuador',
+                31 => 'Finnland',
+                32 => 'Frankreich',
+                33 => 'Ghana',
+                34 => 'Guatemala',
+                35 => 'Haiti',
+                36 => 'Indien',
+                37 => 'Indonesien',
+                38 => 'Irak',
+                39 => 'Italien',
+                40 => 'Libanon',
+                41 => 'Panama',
+                42 => 'Peru',
+                43 => 'Philippinen',
+                44 => 'Portugal',
+                45 => 'Tunesien',
+                46 => 'Türkei',
+                47 => 'Uruguay',
+                48 => 'Venezuela',
+                49 => 'Vietnam',
+                50 => 'Demokratische Republik Kongo',
+                51 => 'Deutschland',
+                52 => 'Nigeria',
+                53 => 'Pakistan',
+                54 => 'Bulgarien',
+                55 => 'Volksrepublik China',
+                56 => 'Ungarn',
+                57 => 'Polen',
+                58 => 'Rumänien',
+                59 => 'Serbien & Montenegro',
+                60 => 'Tschechien',
+                61 => 'Saudi-Arabien',
+                62 => 'Belgien',
+                63 => 'Dänemark',
+                64 => 'Griechenland',
+                65 => 'Libyen',
+                66 => 'Marokko',
+                67 => 'Norwegen',
+                68 => 'Niederlande',
+                69 => 'Schweden',
+                70 => 'Thailand',
+                71 => 'Jordanien',
+                72 => 'Grossbritannien',
+                73 => 'Russland',
+                74 => 'Luxemburg',
+                75 => 'Äthiopien',
+                76 => 'Dominikanische Republik',
+                77 => 'Paraguay',
+                78 => 'El Salvador',
+                79 => 'Taiwan',
+                80 => 'Jamaika',
+                81 => 'San Marino',
+                82 => 'Trinidad & Tobago',
+                83 => 'Jemen',
+                84 => 'Gabun',
+                85 => 'Malaysia',
+                86 => 'Liberia',
+                87 => 'Sudan',
+                88 => 'Mongolei',
+                89 => 'Malta',
+                90 => 'Belarus (Weissrussland)',
+                91 => 'Ukraine',
+                92 => 'Island',
+                93 => 'Kongo',
+                94 => 'Tschad',
+                95 => 'Myanmar',
+                96 => 'Senegal',
+                97 => 'Nicaragua',
+                98 => 'Fiji',
+                99 => 'Honduras',
+                100 => 'Bangladesch',
+                101 => 'Kambodscha',
+                102 => 'Nordkorea',
+                103 => 'Benin',
+                104 => 'Zypern',
+                105 => 'Singapur',
+                106 => 'Zentralafrikanische Republik',
+                107 => 'Quatar',
+                108 => 'Oman',
+                109 => 'Kamerun',
+                110 => 'Madagaskar',
+                111 => 'Kenia',
+                112 => 'Somalia',
+                113 => 'Vereinigte Arabische Emirate',
+                114 => 'Tansania',
+                115 => 'Burundi',
+                116 => 'Dem. Rep. Yemen -1990',
+                117 => 'Nepal',
+                118 => 'Bahrain',
+                119 => 'Afghanistan',
+                120 => 'Ruanda',
+                121 => 'Bhutan',
+                122 => 'Republik Guinea',
+                123 => 'Simbabwe',
+                124 => 'Hong Kong',
+                125 => 'Albanien',
+                126 => 'Brunei',
+                127 => 'Dominika',
+                128 => 'Sao Tomé & Principe',
+                129 => 'Äquatorialguinea',
+                130 => 'Belize',
+                131 => 'Mauritius',
+                132 => 'Kyrgyzstan',
+                133 => 'Slowenien',
+                134 => 'Kroatien',
+                135 => 'Sambia',
+                136 => 'Bosnien-Herzegowina',
+                137 => 'Slowakei',
+                138 => 'Littauen',
+                139 => 'Lettland',
+                140 => 'Jordanien (spez)',
+                141 => 'Angola',
+                142 => 'Mazedonien',
+                143 => 'Gambia',
+                144 => 'Armenien',
+                145 => 'Estland',
+                146 => 'Uganda',
+                147 => 'Kazakhstan',
+                148 => 'Eritrea',
+                149 => 'Georgien',
+                150 => 'Mauretanien',
+                151 => 'Moldovia',
+                152 => 'Azerbaijan',
+                153 => 'Lesotho',
+                154 => 'Barbados',
+                155 => 'Cap Verde',
+                156 => 'Mozambique',
+                157 => 'Andorra',
+                158 => 'Botswana',
+                159 => 'Mali',
+                160 => 'Uzbekistan',
+                161 => 'Burkina-Fasao',
+                162 => 'Namibia',
+                163 => 'Timor-Leste',
+                164 => 'St. Kitts-Nevis',
+                165 => 'Swaziland',
+                166 => 'Djibouti',
+                167 => 'Malediven',
+                168 => 'Montenegro',
+                169 => 'Grenada',
+                170 => 'Niger',
+                171 => 'Tajikistan',
+                172 => 'unknown',
+                173 => 'Kosovo',
+                174 => 'Palästina',
+                175 => 'Togo',
+                176 => 'Comores',
+                177 => 'Turkmenistan',
+                178 => 'unknown',
+                179 => 'Sierra Leone',
+                180 => 'unknown',
+                181 => 'Süd Sudan',
+                '01 ' => 'UN. Office Geneva (also UNHCR Members) (GE,VD, VS, ZH)',
+                '02 ' => 'I.L.O. (GE, VD)',
+                '03 ' => 'W.H.O. (GE, VD)',
+                '04 ' => 'W.M.O. (GE, VD)',
+                '05 ' => 'Int Telecommunications Union (GE, VD)',
+                '06 ' => 'World Int Property Org (GE, VD)',
+                '07 ' => 'CERN (EU Org for Nucler Research) (GE, VD)',
+                '08 ' => 'W.T.O. (GE, VD)',
+                '09 ' => 'E.F.T.A. (GE, VD)',
+                '010 ' => 'I.O.M. (GE, VD)',
+                '011 ' => 'Int Bureau of Education (GE)',
+                '012 ' => 'Inter-Parliamentary Union (GE, VD)',
+                '013 ' => 'OIPC: Org int de la protection civile (GE)',
+                '014 ' => 'Association des pays exportateurs de mineral de fer (?)',
+                '015 ' => 'Universal Postal Union (BE, VD)',
+                '016 ' => 'Intergovermental Org for Int Carriage by Rail (BE)',
+                '017 ' => 'A.D.B. (BS)',
+                '018 ' => 'Commission independante sur les questions humanitaires (?)',
+                '019 ' => 'Commission mondiale sur l`environment et le developpement (GE)',
+                '020 ' => 'Bank for Int Settlements (BL, BS)',
+                '021 ' => 'ITCB: Bureau internationale des textiles et de habillement (GE)',
+                '022 ' => 'Commission du Süd (GE)',
+                '023 ' => 'CDI: Commission du droit int (?)',
+                '024 ' => 'Agence de cooperation culturelle et technique (?)',
+                '025 ' => 'Nouvelle commission independante (?)',
+                '026 ' => 'I.C.R.C. CICR: Comite internationale de la Croix Rouge (GE)',
+                '027 ' => '? (GE, VD)',
+                '028 ' => '? (GE)',
+                '029 ' => 'ACICI: Agence de cooperation et d`information pour le commerce int (GE)',
+                '030 ' => 'Int Federation of Red Cross and Red Crescent (GE, VD)',
+                '031 ' => 'Center consultatif sur la legislation de l`OMC ',
+                '032 ' => 'Cour OSCE: Organisation für Sicherheit und Zusammenarbeit in Europa',
+                '033 ' => 'CMMI: Commission mondiale sur les migrations internationales',
+                '035 ' => 'GFATM Global Found to Figth AIDS, Tuberculosis and Malaria',
+                201 => 'European Union (GE, VD)',
+                202 => 'Org of American States (?)',
+                203 => 'Org of Cetral American Economic Integration (?)',
+                204 => 'Int Voluntary Service Secretariat (GE)',
+                205 => 'African Groundnut Council (?)',
+                206 => 'A.U. (O.A.U.) (GE)',
+                207 => 'Commonwealth (GE)',
+                208 => 'Arabische Liga (GE)',
+                209 => 'Amerikanische Transport-Organisation (GE, VE)',
+                210 => 'Comité independant de development int (?)',
+                211 => 'Org of the Islamic Conference (GE, VD)',
+                212 => 'Groupe des 15. G15 (?)',
+                213 => 'Int Org of Francophone Countries (GE)',
+                214 => 'Bureau international de la banque mondiale auprès de l`ONU et de l`OMC  (GE)',
+                215 => 'African Caribbean and Pacific Group (GE)',
+                216 => 'Office economique et commercial de Macao aupres de l`OMC (GE)',
+                217 => 'Delegation permanente du Forum des Iles du Pacifiques (GE)',
+                250 => 'SALT (Strategic Arms Limitation Talks):  UDSSR (GE)',
+                251 => 'SALT  (Strategic Arms Limitation Talks):  USA (GE)',
+                252 => 'SALT  (Strategic Arms Limitation Talks):  CHINA (GE)',
+                253 => '? (GE)',
+                254 => 'Separate Customs Territors of Taiwan, Penghu, Kinmen and Matsu to the W.T.O. (GE, VD)',
+                302 => 'Canada (GE) 300/400 = int Abrüstungsgespräche',
+                304 => 'Australien (GE) 300/400 = int Abrüstungsgespräche',
+                309 => 'USA (GE) 300/400 = int Abrüstungsgespräche',
+                310 => 'Brasilien (GE) 300/400 = int Abrüstungsgespräche',
+                313 => 'Japan (GE) 300/400 = int Abrüstungsgespräche',
+                324 => 'Chile (GE) 300/400 = int Abrüstungsgespräche',
+                331 => 'Finnland (GE) 300/400 = int Abrüstungsgespräche',
+                332 => 'Frankreich (GE) 300/400 = int Abrüstungsgespräche',
+                336 => 'Indien (GE) 300/400 = int Abrüstungsgespräche',
+                339 => 'Italien (GE) 300/400 = int Abrüstungsgespräche',
+                351 => 'Deutschland (GE) 300/400 = int Abrüstungsgespräche',
+                355 => 'VR China (GE) 300/400 = int Abrüstungsgespräche',
+                362 => 'Belgien (GE) 300/400 = int Abrüstungsgespräche',
+                368 => 'Niederlanden (GE) 300/400 = int Abrüstungsgespräche',
+                372 => 'Grossbritanien (GE) 300/400 = int Abrüstungsgespräche',
+                373 => 'Russland (GE) 300/400 = int Abrüstungsgespräche',
+                500 => 'CH EDA Agents of WTO (GE) 500/600/700 W.T.O.',
+                502 => 'Kanada (GE) 500/600/700 W.T.O.',
+                504 => 'Australien (GE) 500/600/700 W.T.O.',
+                509 => 'USA (GE) 500/600/700 W.T.O.',
+                510 => 'Brasilien (GE) 500/600/700 W.T.O.',
+                511 => 'Brasilien (GE) 500/600/700 W.T.O.',
+                514 => 'Neuseeland (GE) 500/600/700 W.T.O.',
+                524 => 'Chile (GE) 500/600/700 W.T.O.',
+                525 => 'Kolumbien (GE) 500/600/700 W.T.O.',
+                527 => 'Costa Rica (GE) 500/600/700 W.T.O.',
+                530 => 'Equador (GE) 500/600/700 W.T.O.',
+                534 => 'Guatemala  (GE) 500/600/700 W.T.O.',
+                535 => 'Haiti  (GE) 500/600/700 W.T.O.',
+                536 => 'Indien (GE) 500/600/700 W.T.O.',
+                541 => 'Panama (GE) 500/600/700 W.T.O.',
+                543 => 'Philippinen (GE) 500/600/700 W.T.O.',
+                546 => 'Turkey  (GE) 500/600/700 W.T.O.',
+                547 => 'Uruguay (GE) 500/600/700 W.T.O.',
+                553 => 'Pakistan (GE) 500/600/700 W.T.O.',
+                554 => 'Bulgarien (GE) 500/600/700 W.T.O.',
+                555 => 'VR China (GE) 500/600/700 W.T.O.',
+                556 => 'Ungarn (GE) 500/600/700 W.T.O.',
+                563 => 'Dänemark (GE) 500/600/700 W.T.O.',
+                564 => 'Griechenland (GE) 500/600/700 W.T.O.',
+                567 => 'Norwegen (GE) 500/600/700 W.T.O.',
+                570 => 'Thailand (GE) 500/600/700 W.T.O.',
+                573 => 'Russland (GE) 500/600/700 W.T.O.',
+                576 => 'Dominik.Republik (GE) 500/600/700 W.T.O.',
+                578 => 'El Salvador (GE) 500/600/700 W.T.O.',
+                581 => 'San Marino (GE) 500/600/700 W.T.O.',
+                585 => 'Malaysia (GE) 500/600/700 W.T.O.',
+                599 => 'Honduras (GE) 500/600/700 W.T.O.',
+                605 => 'Singapur (GE) 500/600/700 W.T.O.',
+                662 => 'Namibia (GE) 500/600/700 W.T.O.',
+                664 => 'St. Kitts-Nevi (GE) 500/600/700 W.T.O.',
+                701 => 'Europäische Union (GE) 500/600/700 W.T.O.',
+            );
+
+            if (isset($_GET['firstnum']) && isset($_GET['secondnum'])) {
+                
+                $firstnum = $_GET['firstnum'];
+                $secondnum = $_GET['secondnum'];
+                $country = $cd_ar[$secondnum];
+                
+                echo "country/organisation: " . $country . " ";
+                echo "<br>";
+                echo "diplomatic corp rank: " . $firstnum . "th";
+            }
+            ?>
+        </div>
+    </form>
+</body>
+</html>
